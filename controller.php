@@ -62,9 +62,9 @@ class Controller extends Package
             $pkg = parent::install();
             //add blocktypeset
             if (!BlockTypeSet::getByHandle('bacluc_product_set')) {
-                BlockTypeSet::add('bacluc_product_set', 'Accounting', $pkg);
+                BlockTypeSet::add('bacluc_product_set', 'Products', $pkg);
             }
-            //BlockType::installBlockType("bacluc_account_block", $pkg);
+            BlockType::installBlockType("bacluc_product_block", $pkg);
             $em->getConnection()->commit();
         }catch(Exception $e){
             $em->getConnection()->rollBack();

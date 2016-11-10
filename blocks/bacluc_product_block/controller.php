@@ -1,9 +1,10 @@
 <?php
-namespace Concrete\Package\BaclucProductPackage\Block\BaclucAccountBlock;
+namespace Concrete\Package\BaclucProductPackage\Block\BaclucProductBlock;
 
 use Concrete\Core\Package\Package;
 use Concrete\Package\BaclucAccountingPackage\Src\Account;
 use Concrete\Package\BaclucEventPackage\Src\Event;
+use Concrete\Package\BaclucProductPackage\Src\Product;
 use Concrete\Package\BasicTablePackage\Src\BlockOptions\DropdownBlockOption;
 use Concrete\Package\BasicTablePackage\Src\BlockOptions\TableBlockOption;
 use Concrete\Core\Block\BlockController;
@@ -59,7 +60,7 @@ class Controller extends \Concrete\Package\BasicTablePackage\Block\BasicTableBlo
     {
         //$this->model has to be instantiated before, that session handling works right
 
-        $this->model = new Account();
+        $this->model = new Product();
         parent::__construct($obj);
 
 
@@ -111,47 +112,7 @@ class Controller extends \Concrete\Package\BasicTablePackage\Block\BasicTableBlo
     }
 
 
-    /**
-     * if save is pressed, the data is saved to the sql table
-     * @throws \Exception
-     */
-    function action_save_row($redirectOnSuccess = true)
-    {
 
-
-
-        if ($this->post('rcID')) {
-            // we pass the rcID through the form so we can deal with stacks
-            $c = Page::getByID($this->post('rcID'));
-        } else {
-            $c = $this->getCollectionObject();
-        }
-        //form view is over
-        $v =  $this->checkPostValues();
-        if($v === false){
-            return false;
-        }
-
-        if ($this->editKey == null) {
-            $model = $this->model;
-        } else {
-            $model = $this->getEntityManager()->getRepository(get_class($this->model))->findOneBy(array($this->model->getIdFieldName() => $this->editKey));
-        }
-
-        if($this->persistValues($model, $v) === false){
-            return false;
-        }
-
-        $this->getEntityManager()->flush();
-
-
-        $this->finishFormView();
-        if($redirectOnSuccess) {
-            $this->redirect($c->getCollectionPath());
-        }
-
-
-    }
 
 
 

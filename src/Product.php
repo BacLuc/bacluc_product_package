@@ -72,11 +72,6 @@ class Product extends BaseEntity
 
 
 
-    /**
-     * @var Product
-     * @ManyToOne(targetEntity="Concrete\Package\BaclucProductPackage\Src\Product")
-     */
-    protected $NewVersion;
 
 
 
@@ -96,7 +91,7 @@ class Product extends BaseEntity
     public function setDefaultFieldTypes(){
         parent::setDefaultFieldTypes();
 
-        $this->fieldTypes['NewVersion']->setShowInForm(false);
+        //$this->fieldTypes['NewVersion']->setShowInForm(false);
 
 
     }
