@@ -8,6 +8,7 @@
 namespace Concrete\Package\BaclucProductPackage\Src;
 use Concrete\Core\Html\Object\Collection;
 use Concrete\Package\BasicTablePackage\Src\BaseEntity;
+use Concrete\Package\BasicTablePackage\Src\BaseEntityRepository;
 use Concrete\Package\BasicTablePackage\Src\EntityGetterSetter;
 use Concrete\Package\BasicTablePackage\Src\Exceptions\ConsistencyCheckException;
 use Concrete\Package\BasicTablePackage\Src\FieldTypes\DateField as DateField;
@@ -103,7 +104,7 @@ class Product extends BaseEntity
      */
     public static function getDefaultGetDisplayStringFunction(){
         $function = function(Product $item){
-            $item = BaseEntity::getBaseEntityFromProxy($item);
+            $item = BaseEntityRepository::getBaseEntityFromProxy($item);
             $returnString = '';
             if(strlen($item->code) >0){
                 $returnString.= $item->code." ";
